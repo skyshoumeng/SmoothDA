@@ -24,7 +24,7 @@ Existing data augmentation approaches on LiDAR point cloud are mostly developed 
 ### Instances augmentation samples
 
 <p align="center">
-        <img src="figs/insts.png" title="Instaces augmentation results" width="90%">
+        <img src="figs/insts.png" title="Instaces augmentation results" width="70%">
 </p>
 
 ### Scenes augmentation samples
