@@ -7,7 +7,7 @@ Corresponding-author: Jian Pu
 </pre>
 
 <p align="center">
-        <img src="figs/comp.png" title="Comparision with other methods" width="60%">
+        <img src="figs/comp.png" title="Comparision with other methods" width="70%">
 </p> 
 
 ### Abstract
