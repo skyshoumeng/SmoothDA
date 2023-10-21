@@ -15,13 +15,19 @@ Corresponding-author: Jian Pu
 Existing data augmentation approaches on LiDAR point cloud are mostly developed on rigid transformation, such as rotation, flipping, or copy-based and mix-based methods, lacking the capability to generate diverse samples that depict smooth deformations in real-world scenarios. In response, we propose a novel and effective LiDAR point cloud augmentation approach with smooth deformations that can enrich the diversity of training data while keeping the topology of instances and scenes simultaneously. The whole augmentation pipeline can be separated into two different parts: scene augmentation and instance augmentation. To simplify the selection of deformation functions and ensure control over augmentation outcomes, we propose three effective strategies: residual mapping, space decoupling, and function periodization, respectively. We also propose an effective prior-based location sampling algorithm to paste instances on a more reasonable area in the scenes. Extensive experiments on both the SemanticKITTI and nuScenes challenging datasets demonstrate the effectiveness of our proposed approach across various baselines.
 
 
+### Augmentation Pipeline
+
 <p align="center">
         <img src="figs/pipeline.png" title="Augmentation Pipeline" width="90%">
 </p>
 
+### Instances augmentation samples
+
 <p align="center">
         <img src="figs/insts.png" title="Instaces augmentation results" width="90%">
 </p>
+
+### Scenes augmentation samples
 
 <p align="center">
         <img src="figs/scenes.png" title="Scenes augmentation results" width="90%">
