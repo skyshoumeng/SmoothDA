@@ -41,7 +41,10 @@ Our code borrows heavily from [PolarMix](https://github.com/xiaoaoran/polarmix).
 
 #### Training on SemanticKITTI
 
-You may run the following code to train the model from scratch. 
+Please generate the instances database first, following the instructions provided in [Panoptic-PolarNet](https://github.com/edwardzhou130/Panoptic-PolarNet).
+
+
+Then you may run the following code to train the model from scratch. 
 
 SPVCNN:
 ```bash
