@@ -1,4 +1,6 @@
 # SmoothDA
+
+<pre>
 Leveraging Smooth Deformation Augmentation for LiDAR Point Cloud Semantic Segmentation
 Shoumeng Qiu, Jie Chen, Chenghang Lai, Hong Lu, Xiangyang Xue, Jian Pu
 Corresponding-author: Jian Pu
