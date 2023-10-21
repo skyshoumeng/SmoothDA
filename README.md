@@ -37,11 +37,9 @@ Existing data augmentation approaches on LiDAR point cloud are mostly developed 
 
 Our code borrows heavily from [PolarMix](https://github.com/xiaoaoran/polarmix). For the training details, please refer to the instructions provided in the PolarMix project.
 
-### Training
+#### Training on SemanticKITTI
 
-#### SemanticKITTI
-
-We release the training code for SPVCNN and MinkowskiNet with PolarMix. You may run the following code to train the model from scratch. 
+You may run the following code to train the model from scratch. 
 
 SPVCNN:
 ```bash
