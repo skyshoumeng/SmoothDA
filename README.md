@@ -47,7 +47,6 @@ STDC2:
 CUDA_VISIBLE_DEVICES=0,1 PORT=29500 sh tools/dist_train.sh configs/stdc/stdc2_512x1024_80k_cityscapes.py 2
 </pre>
 
-####
-
-We thanks for the opensource [mmsegmentation](https://github.com/open-mmlab/mmsegmentation) codebase。 
+### Thanks
+We thank the opensource project [PolarMix](https://github.com/xiaoaoran/polarmix).
 
