@@ -35,17 +35,22 @@ Existing data augmentation approaches on LiDAR point cloud are mostly developed 
 
 ### Code 
 
-Our code is very easy to use, simply replace the loss function mmseg/models/loss/cross_entropy_loss.py under the mmsegmenation framework with the code we provide. 
+Our code borrows heavily from [PolarMix](https://github.com/xiaoaoran/polarmix). For the training details, please refer to the instructions provided in the PolarMix project.
 
-For the training details, please refer to the instructions provided in mmsegmentation codebase [Train.md](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/train.md). 
+### Training
 
-<pre>
-Take the STDC model as an example:
-STDC1:
-CUDA_VISIBLE_DEVICES=0,1 PORT=29500 sh tools/dist_train.sh configs/stdc/stdc1_512x1024_80k_cityscapes.py 2
-STDC2:
-CUDA_VISIBLE_DEVICES=0,1 PORT=29500 sh tools/dist_train.sh configs/stdc/stdc2_512x1024_80k_cityscapes.py 2
-</pre>
+#### SemanticKITTI
+
+We release the training code for SPVCNN and MinkowskiNet with PolarMix. You may run the following code to train the model from scratch. 
+
+SPVCNN:
+```bash
+python train.py configs/semantic_kitti/spvcnn/cr0p5.yaml --run-dir runs/semantickitti/spvcnn_polarmix --distributed False
+```
+MinkowskiNet:
+```bash
+python train.py configs/semantic_kitti/minkunet/cr0p5.yaml --run-dir run/semantickitti/minkunet_polarmix --distributed False
+```
 
 ### Thanks
 We thank the opensource project [PolarMix](https://github.com/xiaoaoran/polarmix).
