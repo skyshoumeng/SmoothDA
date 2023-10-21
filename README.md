@@ -1,92 +1,46 @@
-# PolarMix
-
-[PolarMix: A General Data Augmentation Technique for LiDAR Point Clouds](https://arxiv.org/abs/2208.00223)
-
-[Aoran Xiao](https://xiaoaoran.github.io/Home/), [Jiaxing Huang](https://jxhuang0508.github.io/), [Dayan Guan](https://dayan-guan.github.io/), [Kaiwen Cui](https://scholar.google.com/citations?user=-9KXqLsAAAAJ&hl=zh-CN), [Shijian Lu](https://personal.ntu.edu.sg/shijian.lu/), [Ling Shao](https://scholar.google.com/citations?user=z84rLjoAAAAJ&hl=en)
-
-NeurIPS 2022
-
-## News
-
-**[2022-09-20]** Code is released.  
-**[2022-09-15]** Our paper is accepted to NeurIPS 2022.
+# SmoothDA
+Leveraging Smooth Deformation Augmentation for LiDAR Point Cloud Semantic Segmentation
+Shoumeng Qiu, Jie Chen, Chenghang Lai, Hong Lu, Xiangyang Xue, Jian Pu
+Corresponding-author: Jian Pu
+</pre>
 
 
-## Usage
+<p align="center">
+        <img src="figs/aug.png" title="Augmentation Pipeline" width="60%">
+</p> 
 
-#### Installation
+### Abstract
 
-Please visit and follow installation instruction in [this repo](https://github.com/mit-han-lab/spvnas).
+Existing data augmentation approaches on LiDAR point cloud are mostly developed on rigid transformation, such as rotation, flipping, or copy-based and mix-based methods, lacking the capability to generate diverse samples that depict smooth deformations in real-world scenarios. In response, we propose a novel and effective LiDAR point cloud augmentation approach with smooth deformations that can enrich the diversity of training data while keeping the topology of instances and scenes simultaneously. The whole augmentation pipeline can be separated into two different parts: scene augmentation and instance augmentation. To simplify the selection of deformation functions and ensure control over augmentation outcomes, we propose three effective strategies: residual mapping, space decoupling, and function periodization, respectively. We also propose an effective prior-based location sampling algorithm to paste instances on a more reasonable area in the scenes. Extensive experiments on both the SemanticKITTI and nuScenes challenging datasets demonstrate the effectiveness of our proposed approach across various baselines.
 
-
-### Data Preparation
-
-#### SemanticKITTI  
-- Please follow the instructions from [here](http://www.semantic-kitti.org) to download the SemanticKITTI dataset (both KITTI Odometry dataset and SemanticKITTI labels) and extract all the files in the `sequences` folder to `/dataset/semantic-kitti`. You shall see 22 folders 00, 01, …, 21; each with subfolders named `velodyne` and `labels`.  
-- Change the data root path in configs/semantic_kitti/default.yaml
-
-
-### Training
-
-#### SemanticKITTI
-
-We release the training code for SPVCNN and MinkowskiNet with PolarMix. You may run the following code to train the model from scratch. 
-
-SPVCNN:
-```bash
-python train.py configs/semantic_kitti/spvcnn/cr0p5.yaml --run-dir runs/semantickitti/spvcnn_polarmix --distributed False
-```
-MinkowskiNet:
-```bash
-python train.py configs/semantic_kitti/minkunet/cr0p5.yaml --run-dir run/semantickitti/minkunet_polarmix --distributed False
-```
-
-- Note we only used one 2080Ti for training and testing. Training from scratch takes around 1.5 days. You may try larger batch size or distributed learning for faster training.
-
-### Testing Models
-
-You can run the following command to test the performance of SPVCNN/MinkUNet models with PolarMix.
-
-```bash
-torchpack dist-run -np 1 python test.py --name ./runs/semantickitti/spvcnn_polarmix
-torchpack dist-run -np 1 python test.py --name ./runs/semantickitti/minkunet_polarmix
-```
-
-We provide pre-trained models of MinkUNet and SPVCNN. You may [download](https://drive.google.com/drive/folders/1SHaGbgUUxoVNt-Y30XZDedRz7iffQ3JI?usp=sharing) and place them under './runs/semantickitti/' for testing. 
-
-mIoUs over validation set of SemanticKITTI are reported as follows:
-
-|             | w/o PolarMix | w/ PolarMix |
-| :---------: | :----------: | :---------: |
-| `MinkUNet`  |     58.9     |  65.0       |   
-| `SPVCNN`    |     60.7     |  66.2       | 
+<p align="center">
+        <img src="figs/framework.png" title="Subclassified Loss Pipeline" width="90%">
+</p>
 
 
-### Visualizations
+<p align="center">
+        <img src="figs/gain_class.png" title="Subclassified Loss Pipeline" width="90%">
+</p>
 
-Follow instructions in [this repo](https://github.com/mit-han-lab/spvnas).
+<p align="center">
+        <img src="figs/weight_maps.png" title="Subclassified Loss Pipeline" width="90%">
+</p>
 
+### Code 
 
+Our code is very easy to use, simply replace the loss function mmseg/models/loss/cross_entropy_loss.py under the mmsegmenation framework with the code we provide. 
 
-## Citation
+For the training details, please refer to the instructions provided in mmsegmentation codebase [Train.md](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/train.md). 
 
-If you use this code for your research, please cite our paper.
+<pre>
+Take the STDC model as an example:
+STDC1:
+CUDA_VISIBLE_DEVICES=0,1 PORT=29500 sh tools/dist_train.sh configs/stdc/stdc1_512x1024_80k_cityscapes.py 2
+STDC2:
+CUDA_VISIBLE_DEVICES=0,1 PORT=29500 sh tools/dist_train.sh configs/stdc/stdc2_512x1024_80k_cityscapes.py 2
+</pre>
 
-```
-@article{xiao2022polarmix,
-  title={PolarMix: A General Data Augmentation Technique for LiDAR Point Clouds},
-  author={Xiao, Aoran and Huang, Jiaxing and Guan, Dayan and Cui, Kaiwen and Lu, Shijian and Shao, Ling},
-  journal={arXiv preprint arXiv:2208.00223},
-  year={2022}
-}
-```
+####
 
-## Thanks
-We thank the opensource project [TorchSparse](https://github.com/mit-han-lab/torchsparse) and [SPVNAS](https://github.com/mit-han-lab/spvnas).
+We thanks for the opensource [mmsegmentation](https://github.com/open-mmlab/mmsegmentation) codebase。 
 
-
-## Related Repos
-Find our other repos for point cloud understanding!
-- [Unsupervised Representation Learning for Point Clouds: A Survey](https://github.com/xiaoaoran/3d_url_survey)
-- [SynLiDAR: Synthetic LiDAR sequential point cloud dataset with point-wise annotations (AAAI2022)](https://github.com/xiaoaoran/SynLiDAR)
-- [FPS-Net: A convolutional fusion network for large-scale LiDAR point cloud segmentation](https://github.com/xiaoaoran/FPS-Net)
